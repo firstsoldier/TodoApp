@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="TodoApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+    <style>
+        .list {
+            width: 600px;
+            margin: 100px auto;
+        }
+
+        .done {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="list" ng-controller="TodoController">
+
+    <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <h1>
+                <span>TODOS</span>
+            </h1>
+        </div>
+    </md-toolbar>
+
+    <form ng-submit="NewTodo()" name="frm">
+        <md-input-container><label>New todo</label><input type="text" ng-model="newtodo" required/></md-input-container>
+        <md-button ng-click="NewTodo" ng-disabled="frm.$invalid" class="md-raised md-primary">Add to list!</md-button>
+    </form>
+
+    <md-input-container><label>search</label><input type="text" ng-model="filterKey" /></md-input-container>
+
+    <br/>
+
+    <table class="table table-striped">
+        <tr ng-repeat="item in todos | filter: filterKey">
+            <td><md-checkbox type="checkbox" ng-model="item.status" ng-class="{done: item.status}">{{item.title}}</md-checkbox></td>
+        </tr>
+    </table>
+    <md-button class="md-warn md-raised md-hue-2" ng-click="ClearTodo()">Clear Completed</md-button>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.js"></script>
+<script src="https://code.angularjs.org/1.3.14/angular-aria.min.js"></script>
+<script src="https://code.angularjs.org/1.3.14/angular-animate.min.js"></script>
+<script src="http://rawgit.com/angular/bower-material/master/angular-material.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
